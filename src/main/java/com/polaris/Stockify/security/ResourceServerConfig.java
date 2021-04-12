@@ -49,7 +49,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/auth/**").permitAll()
 				.antMatchers("/transactions/**").access("hasRole('ADMIN')")
-				.antMatchers("/stocks/**").access("hasRole('ADMIN')")
+				.antMatchers("/stocks/**").access("hasRole('USER')")
 				.antMatchers("/").permitAll()
 				.anyRequest().denyAll();
 
