@@ -48,6 +48,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.and()
 				.authorizeRequests()
 				.antMatchers("/auth/**").permitAll()
+				.antMatchers("/home/**").permitAll()
 				.antMatchers("/transactions/**").access("hasRole('ADMIN')")
 				.antMatchers("/stocks/**").access("hasRole('USER')")
 				.antMatchers("/").permitAll()

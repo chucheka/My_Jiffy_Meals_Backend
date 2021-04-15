@@ -1,0 +1,37 @@
+version: '3.7'
+
+# Define services
+services:
+  # App backend service
+  stockify:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: .
+    container_name: stockify
+    depends_on:
+      - db
+    ports:
+      - "8182:8181" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    environment: # Pass environment variables to the service
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: kxke22@me 
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+
+  # Database Service (Mysql)
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=kxke22@me
+    networks:
+      - backend  
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
